@@ -13,6 +13,7 @@ class LoginForm extends React.Component {
     errors: {}
   };
 
+  //onChange to change value of input field, works with any input field
   onChange = e =>
     this.setState({
       data: { ...this.state.data, [e.target.name]: e.target.value }
@@ -24,11 +25,11 @@ class LoginForm extends React.Component {
     //if errors, display them, also remove existing errors if fixed
     this.setState({ errors });
     e.preventDefault();
-    //Submit data if no errors
+    //Submit data if no errors, .submit goes to LoginPage
     if (Object.keys(errors).length === 0) {
       this.props
         .submit(this.state.data)
-        .catch(err => this.setState({ errors: err.response.data.errors }));
+        .catch(err => this.setState({ errors: err.response.data.errors })); //if error with submit, get global error from server
     }
   };
 
